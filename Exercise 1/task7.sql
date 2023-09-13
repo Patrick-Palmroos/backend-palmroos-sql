@@ -8,3 +8,9 @@ Ota tulosjoukkoon mukaan albumin nimi, albumin julkaisuvuosi, kappaleen nimi ja 
 Järjestä tulosjoukko ensisijaisesti albumin nimen ja toissijaisesti kappaleen numeron mukaan.
 */
 
+SELECT a.name, a.year, t.name, t.length 
+FROM album a 
+LEFT JOIN track t ON a.id = t.album_id 
+LEFT JOIN artist y ON a.artist_id = y.id
+WHERE y.name = "Iron Maiden"
+ORDER BY a.name, t.track_number;
