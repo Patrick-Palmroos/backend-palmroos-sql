@@ -8,3 +8,31 @@ on ongelmallinen. Sisällytä esimerkkidataa vastaukseesi. Datan tulisi selväst
 jonka normalisoimaton taulu aiheuttaa.
 */
 
+Normalisaatiossa on kyse standardista, miten tietokantoja tehdään. Vaikka
+tietokantoja voi tehdä ilman normalisaatiota, niin ei se ole kannattavaa
+monista syistä.
+
+nimi | sposti | hinta | tuote numero
+-----+--------+-------+-------------
+     |        |       |
+=> Tälläisessä taulussa esimerkiksi jos asiakas tilaa
+useamman tuotteen, niin toistuu tieto turhaan joka kerta.
+Myös taulukon luettavuus vaikeutuu sen laajetessa paljon.
+Muutoksia asiakkaan tietoihin tehdessä voi myös tulla hankaluuksia
+
+normalisoituna voisi olla vaikka lyhyesti näin:
+
+(users)
+id | nimi  | sposti
+---+-------+-------------
+1  | Jukka | jukka@lol.fi
+
+
+(tilaukset)
+tilaus_id | user_id | tuote | hinta
+----------+---------+-------+-------
+ 1        | 1       | 12    | 15.00
+
+=> Tässä esimerkissä jos vaikka käyttäjän sposti muuttuu,
+niin ei tarvitse jokaista tilausta muuttaa erikseen. Tilaus
+on jo uniikilla user_id:llä tietoinen kenelle se  tilaus kuuluu.
