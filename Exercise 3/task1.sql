@@ -8,3 +8,27 @@ Tietokannan tulee noudattaa viime viikon suunitelmaa. Jos suunnitelmaan pitää 
 mukaan kuva päivitetyn tietokannan rakenteesta. Lisää myös vierasavainrajoitteet tauluille.
 */
 
+CREATE DATABASE news;
+USE news;
+CREATE TABLE users(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(75),
+    author BOOLEAN default FALSE
+);
+CREATE TABLE articles (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(200) NOT NULL,
+    content TEXT,
+    author INT,
+    FOREIGN KEY(author) REFRENCES users(id) ON DELETE SET NULL
+    ON UPDATE CASCADE
+);
+CREATE TABLE comments(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT FOREIGN KEY REFRENCES users(id) NOT NULL ON DELETE SET NULL
+    ON UPDATE CASCADE,
+    article_id INT FOREIGN KEY REFRENCES news(id) NOT NULL ON DELETE
+    CASCADE ON UPDATE CASCADE,
+    text VARCHAR(250) NOT NULL
+);
